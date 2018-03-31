@@ -58,6 +58,16 @@ func sftpClient(sshClient *ssh.Client) *sftp.Client {
 func main() {
 	flag.Parse()
 
+	if *host == "" {
+		*host = "127.0.0.1:22"
+	}
+	if *user == "" {
+		*user = "root:123456"
+	}
+	if *remoteDir == "" {
+		*remoteDir = "/tmp"
+	}
+
 	sshClient := sshConnect(*host, *user)
 	defer sshClient.Close()
 
